@@ -2,29 +2,22 @@ pipeline {
 agent any
 
 
-environment {
-    ENV = 'QA'
-    QA_URL = 'https://opensource-demo.orangehrmlive.com'
-    QA_USERNAME = 'Admin'
-    QA_PASSWORD = 'admin123'
-}
-
 stages {
 
     stage('Checkout') {
         steps {
             git branch: 'main',
-            url: 'https://github.com/Hemanth-ur/playwright-HRM-framework.git'
+                url: 'https://github.com/Hemanth-ur/playwright-HRM-framework.git'
         }
     }
 
     stage('Install Dependencies') {
         steps {
-            bat 'npm install'
+            bat 'npm ci'
         }
     }
 
-    stage('Install Browsers') {
+    stage('Install Playwright Browsers') {
         steps {
             bat 'npx playwright install'
         }
@@ -45,20 +38,18 @@ stages {
 
 post {
 
-    always {
-        archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
-    }
-
     success {
-        echo 'Tests Passed'
+        echo 'Playwright execution completed successfully'
     }
 
     failure {
-        echo 'Tests Failed'
+        echo 'Playwright execution failed'
+    }
+
+    always {
+        archiveArtifacts artifacts: 'allure-report/**', allowEmptyArchive: true
     }
 }
 
+
 }
-
-
-
