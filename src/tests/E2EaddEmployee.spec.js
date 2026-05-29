@@ -5,11 +5,11 @@ test.describe('Employee Management Module', () => {
 
 test('Admin can add employee successfully', async ({ pages }) => {
 
-    const firstName = 'Crack';
+    const firstName = 'Conlley';
 
     await pages.addEmployeePage.navigateToAddEmployee();
 
-    await pages.addEmployeePage.createEmployee(firstName,'A','David');
+    await pages.addEmployeePage.createEmployee(firstName,'A','Deva');
     
     await pages.addEmployeePage.verifyEmployeeAdded();
 
