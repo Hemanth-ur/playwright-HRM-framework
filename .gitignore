@@ -15,4 +15,3 @@ allure-report/
 *.log
 
 # Environment variables
-.env
