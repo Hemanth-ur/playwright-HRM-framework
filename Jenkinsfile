@@ -5,7 +5,7 @@ pipeline {
     steps {
         bat 'npx playwright test'
     }
-}
+
 
         stage('Checkout') {
             steps {
