@@ -31,7 +31,7 @@ stages {
 
    stage('Generate Allure Report') {
     steps {
-        bat 'npx allure generate "./allure-results" -o "./allure-report" --clean'
+        bat 'npx allure-commandline generate allure-results --clean -o allure-report'
     }
 }
 }
