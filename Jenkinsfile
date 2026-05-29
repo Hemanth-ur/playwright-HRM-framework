@@ -1,7 +1,7 @@
 pipeline {
 agent any
 
-
+```
 stages {
 
     stage('Checkout') {
@@ -28,8 +28,9 @@ stages {
             bat 'npx playwright test'
         }
     }
+}
 
- post {
+post {
 
     always {
 
@@ -49,7 +50,6 @@ stages {
         echo 'Tests Failed'
     }
 }
-
-}
+```
 
 }
