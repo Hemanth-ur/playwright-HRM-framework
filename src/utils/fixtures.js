@@ -6,12 +6,10 @@ import { DashboardPage } from '../pages/DashboardPage';
 import { PerformancePage } from '../pages/PerformancePage';
 
 
-
-// ==Environment Configuration===
+// Environment Configuration
 
 
 const config = {
-
     QA: {
         url: process.env.QA_URL,
         username: process.env.QA_USERNAME,
@@ -23,15 +21,22 @@ const config = {
         username: process.env.UAT_USERNAME,
         password: process.env.UAT_PASSWORD
     }
-
 };
 
-const envData = config[process.env.ENV];
+const environment = process.env.ENV || 'QA';
 
-console.log(`Running tests on ${process.env.ENV} environment`);
+const envData = config[environment];
+
+if (!envData) {
+    throw new Error(
+        `Environment '${environment}' is not configured. Supported environments: QA, UAT`
+    );
+}
+
+console.log(`Running tests on ${environment} environment`);
 
 
-// ==Fixtures==
+// Fixtures
 
 
 export const test = base.extend({
@@ -39,15 +44,12 @@ export const test = base.extend({
     pages: async ({ page }, use) => {
 
         const pages = {
-
             loginPage: new LoginPage(page),
             addEmployeePage: new AddEmployeePage(page),
             dashboardPage: new DashboardPage(page),
             performancePage: new PerformancePage(page)
-
         };
 
-        // Dynamic Login
         await pages.loginPage.navigate(envData.url);
 
         await pages.loginPage.login(
@@ -59,7 +61,6 @@ export const test = base.extend({
 
         await use(pages);
     }
-
 });
 
 export { expect };
