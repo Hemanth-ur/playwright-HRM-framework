@@ -1,54 +1,62 @@
 pipeline {
-    agent any
+agent any
 
-    stages {
+```
+environment {
+    ENV = 'QA'
+    QA_URL = 'https://opensource-demo.orangehrmlive.com'
+    QA_USERNAME = 'Admin'
+    QA_PASSWORD = 'admin123'
+}
 
-        stage('Checkout') {
-            steps {
-                git branch: 'main',
-                url: 'https://github.com/Hemanth-ur/playwright-HRM-framework.git'
-            }
-        }
+stages {
 
-        stage('Install Dependencies') {
-            steps {
-                bat 'npm install'
-            }
-        }
-
-        stage('Install Browsers') {
-            steps {
-                bat 'npx playwright install'
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                bat 'npx playwright test'
-            }
-        }
-
-        stage('Generate Allure Report') {
-            steps {
-                bat 'npx allure generate allure-results --clean -o allure-report'
-            }
+    stage('Checkout') {
+        steps {
+            git branch: 'main',
+            url: 'https://github.com/Hemanth-ur/playwright-HRM-framework.git'
         }
     }
 
-    post {
-
-        always {
-
-            archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
-
-        }
-
-        success {
-            echo 'Tests Passed'
-        }
-
-        failure {
-            echo 'Tests Failed'
+    stage('Install Dependencies') {
+        steps {
+            bat 'npm install'
         }
     }
+
+    stage('Install Browsers') {
+        steps {
+            bat 'npx playwright install'
+        }
+    }
+
+    stage('Run Tests') {
+        steps {
+            bat 'npx playwright test'
+        }
+    }
+
+    stage('Generate Allure Report') {
+        steps {
+            bat 'npx allure generate allure-results --clean -o allure-report'
+        }
+    }
+}
+
+post {
+
+    always {
+        archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
+    }
+
+    success {
+        echo 'Tests Passed'
+    }
+
+    failure {
+        echo 'Tests Failed'
+    }
+}
+```
+
 }
