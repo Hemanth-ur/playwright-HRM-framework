@@ -29,27 +29,26 @@ stages {
         }
     }
 
-   stage('Generate Allure Report') {
-    steps {
-        bat 'npx allure-commandline generate allure-results --clean -o allure-report'
-    }
-}
-}
+ post {
 
-post {
+    always {
+
+        allure([
+            includeProperties: false,
+            jdk: '',
+            results: [[path: 'allure-results']]
+        ])
+
+    }
 
     success {
-        echo 'Playwright execution completed successfully'
+        echo 'Tests Passed'
     }
 
     failure {
-        echo 'Playwright execution failed'
-    }
-
-    always {
-        archiveArtifacts artifacts: 'allure-report/**', allowEmptyArchive: true
+        echo 'Tests Failed'
     }
 }
 
-
 }
+
