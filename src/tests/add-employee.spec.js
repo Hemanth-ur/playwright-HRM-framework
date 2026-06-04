@@ -1,4 +1,4 @@
-import { test, expect } from '../utils/fixtures';
+import { test, expect } from '../fixtures/base.fixture';
 import { employeeData } from '../testData/employeeData';
 
 test.describe('Employee Management Module', () => {
