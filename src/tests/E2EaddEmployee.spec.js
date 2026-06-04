@@ -9,7 +9,7 @@ test('Admin can add employee successfully', async ({ pages }) => {
 
     await pages.addEmployeePage.navigateToAddEmployee();
 
-    await pages.addEmployeePage.createEmployee(firstName,'A','Deva');
+    await pages.addEmployeePage.createEmployee(firstName,'A','jonty');
     
     await pages.addEmployeePage.verifyEmployeeAdded();
 

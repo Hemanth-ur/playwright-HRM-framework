@@ -23,7 +23,7 @@ export default defineConfig({
         ['allure-playwright']
     ],
 
-    globalTeardown: require.resolve('./src/utils/environmentInfo'),
+    globalTeardown: require.resolve('./src/utils/Reports_environmentInfo'),
 
     use: {
 
