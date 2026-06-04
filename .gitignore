@@ -6,7 +6,7 @@ node_modules/
 # Playwright reports
 playwright-report/
 test-results/
-.env/
+
 
 # Allure reports
 allure-results/
@@ -16,3 +16,4 @@ allure-report/
 *.log
 
 # Environment variables
+.env/
