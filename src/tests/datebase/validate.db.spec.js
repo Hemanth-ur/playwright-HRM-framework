@@ -22,7 +22,7 @@ test("Monthly HR Notification E2E", async ({ request }) => {
 
   const schedulerResponse = await request.post('https://test-api-url.com/scheduler/runMonthlyJob');
 
- expect(schedulerResponse.status()).toBe(200);
+  expect(schedulerResponse.status()).toBe(200);
 
   const email = await getLatestEmail();
 
