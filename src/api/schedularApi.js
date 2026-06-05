@@ -1,12 +1,13 @@
 export class SchedulerApi {
 
-    constructor(request) {
+    constructor(request) 
+    {
         this.request = request;
     }
 
-    async runMonthlyJob() {
-        return await this.request.post(
-            '/scheduler/runMonthlyJob'
-        );
+    async runMonthlyJob() 
+    {
+        return await this.request.post('/scheduler/runMonthlyJob');
     }
+    
 }

@@ -1,7 +1,18 @@
 const { test, expect }= require('@playwright/test');
-const {getEmployeesWithoutManager} = require('../utils/dbHelper');
-const {readExcel} = require('../utils/excelHelper');
-const {getLatestEmail} = require('../utils/emailHelper');
+const {getEmployeesWithoutManager} = require('../../utils/dbHelper');
+const {readExcel} = require('../../utils/excelHelper');
+const {getLatestEmail} = require('../../utils/emailHelper');
+
+
+
+test('Validate employees without manager', async () => {
+
+    const employees = await getEmployeesWithoutManager();
+
+    console.table(employees);
+    expect(employees.length).toBeGreaterThan(0);
+
+});
 
 
 test("Monthly HR Notification E2E", async ({ request }) => {
@@ -11,7 +22,7 @@ test("Monthly HR Notification E2E", async ({ request }) => {
 
   const schedulerResponse = await request.post('https://test-api-url.com/scheduler/runMonthlyJob');
 
-  expect(schedulerResponse.status()).toBe(200);
+ expect(schedulerResponse.status()).toBe(200);
 
   const email = await getLatestEmail();
 
@@ -23,3 +34,5 @@ test("Monthly HR Notification E2E", async ({ request }) => {
 
   
 });
+
+

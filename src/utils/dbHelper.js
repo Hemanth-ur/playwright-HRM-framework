@@ -11,8 +11,8 @@ exports.getEmployeesWithoutManager = async function() {
 
     try {
         const [rows] = await connection.execute(`
-            SELECT employee_id
-            FROM employee
+            SELECT *
+            FROM reports
             WHERE manager_id IS NULL
         `);
 

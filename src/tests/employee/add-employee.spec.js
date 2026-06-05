@@ -1,5 +1,5 @@
-import { test, expect } from '../fixtures/base.fixture';
-import { employeeData } from '../testData/employeeData';
+import { test, expect } from '../../fixtures/base.fixture';
+import { employeeData } from '../../testData/employeeData';
 
 test.describe('Employee Management Module', () => {
 
